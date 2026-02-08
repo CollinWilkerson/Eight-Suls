@@ -1,5 +1,8 @@
 using UnityEngine;
 
+//I feel like this is missing some nuance
+//An eaiser way to interpret this might be to interpret the players move as one of 8 possible slashes
+//or a stab like in skyward sword
 public class SwordBehavior : MonoBehaviour
 {
     [SerializeField] string damageType;
