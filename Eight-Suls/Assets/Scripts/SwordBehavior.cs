@@ -38,7 +38,7 @@ public class SwordBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision with" + collision.gameObject.name);
+        //Debug.Log("Collision with" + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Enemy"))
         {
             if (!DamageDisplayBehavior.hitThisFrame)

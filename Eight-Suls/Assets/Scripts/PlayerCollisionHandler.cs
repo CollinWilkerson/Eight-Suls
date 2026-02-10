@@ -11,6 +11,7 @@ public class PlayerCollisionHandler : MonoBehaviour
 
         if (collision.gameObject.CompareTag("EnemyWeapon"))
         {
+            Debug.Log("HitForDamage");
             PlayerDamaged.Invoke();
         }
     }
