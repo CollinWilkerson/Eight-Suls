@@ -44,4 +44,27 @@ public class RosarieController : MonoBehaviour
         }
         //if the player has no rosaries, they have no health so they should die
     }
+
+    //probably better to set active and inactive but I am tired
+    public void HealDamage(int healAmount)
+    {
+        int endHealth = rosarieObjects.Count + healAmount;
+        if(endHealth > health)
+        {
+            endHealth = health;
+        }
+
+        for(int i = rosarieObjects.Count; i < endHealth; i++)
+        {
+            // angle of object on circles edge
+            float radians = 2 * Mathf.PI / health * i;
+
+            float objX = Mathf.Sin(radians);
+            float objY = Mathf.Cos(radians);
+
+            Vector3 spawnPos = new Vector3(objX, objY, 0);
+            //pretty sure i need quaternion identity to be something different but since im using spheres it should be okay
+            rosarieObjects.Push(Instantiate(rosariePrefab, spawnPos * wristSize, Quaternion.identity, wristTransform));
+        }
+    }
 }
