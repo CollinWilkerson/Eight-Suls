@@ -5,15 +5,21 @@ public class RosarieController : MonoBehaviour
 {
     [SerializeField] GameObject rosariePrefab;
     [SerializeField] Transform wristTransform;
-    [SerializeField] int health;
+    [SerializeField] GameObject[] rosaries;
     [SerializeField] float wristSize;
 
+    private int health;
     private Stack<GameObject> rosarieObjects = new Stack<GameObject>();
 
     private void Start()
     {
+        health = rosaries.Length;
         FindAnyObjectByType<PlayerCollisionHandler>().PlayerDamaged.AddListener(TakeDamage);
-        SpawnPrefabInCircle(rosariePrefab, wristTransform, health);
+        foreach(GameObject r in rosaries)
+        {
+            rosarieObjects.Push(r);
+        }
+        //SpawnPrefabInCircle(rosariePrefab, wristTransform, health);
     }
 
     private void SpawnPrefabInCircle(GameObject spawnObj, Transform parentObj, int objectsToSpawn)
@@ -29,7 +35,7 @@ public class RosarieController : MonoBehaviour
 
             Vector3 spawnPos = new Vector3(objX, objY, 0);
             //pretty sure i need quaternion identity to be something different but since im using spheres it should be okay
-            rosarieObjects.Push(Instantiate(spawnObj, spawnPos * wristSize, Quaternion.identity, parentObj));
+            rosarieObjects.Push(Instantiate(spawnObj, (spawnPos * wristSize) + parentObj.position, Quaternion.identity, parentObj));
         }
     }
 
@@ -39,7 +45,7 @@ public class RosarieController : MonoBehaviour
         //could also use Stack.Count to add a red vingette on low health
         if(rosarieObjects.Peek() != null)
         {
-            Destroy(rosarieObjects.Pop());
+            rosarieObjects.Pop().SetActive(false);
             return;
         }
         //if the player has no rosaries, they have no health so they should die
@@ -56,15 +62,8 @@ public class RosarieController : MonoBehaviour
 
         for(int i = rosarieObjects.Count; i < endHealth; i++)
         {
-            // angle of object on circles edge
-            float radians = 2 * Mathf.PI / health * i;
-
-            float objX = Mathf.Sin(radians);
-            float objY = Mathf.Cos(radians);
-
-            Vector3 spawnPos = new Vector3(objX, objY, 0);
-            //pretty sure i need quaternion identity to be something different but since im using spheres it should be okay
-            rosarieObjects.Push(Instantiate(rosariePrefab, spawnPos * wristSize, Quaternion.identity, wristTransform));
+            rosarieObjects.Push(rosaries[i]);
+            rosaries[i].SetActive(true);
         }
     }
 }
