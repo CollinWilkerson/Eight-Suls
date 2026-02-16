@@ -16,6 +16,7 @@ public class TeleortKnife : MonoBehaviour
         if (isPrimed)
         {
             player.transform.position = transform.position;
+            isPrimed = false;
         }
     }
 }
