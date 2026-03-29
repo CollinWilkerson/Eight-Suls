@@ -44,7 +44,9 @@ public class RosarieController : MonoBehaviour
     {
         //may need to use TryPeek
         //could also use Stack.Count to add a red vingette on low health
-        if(rosarieObjects.Peek() != null)
+        GameObject topRosary;
+        rosarieObjects.TryPeek(out topRosary);
+        if (topRosary != null)
         {
             rosarieObjects.Pop().SetActive(false);
             return;
