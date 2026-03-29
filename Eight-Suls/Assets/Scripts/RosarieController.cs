@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class RosarieController : MonoBehaviour
 {
@@ -49,6 +50,8 @@ public class RosarieController : MonoBehaviour
             return;
         }
         //if the player has no rosaries, they have no health so they should die
+        //this is pretty primitive, having a game over sceen would be nice. no space for checkpoints
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     //probably better to set active and inactive but I am tired
