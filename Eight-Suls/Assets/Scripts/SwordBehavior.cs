@@ -41,6 +41,10 @@ public class SwordBehavior : MonoBehaviour
         //Debug.Log("Collision with" + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            if(collision.gameObject.GetComponent<EnemyBehavior>() != null)
+            {
+                collision.gameObject.GetComponent<EnemyBehavior>().HitEnemy();
+            }
             if (!DamageDisplayBehavior.hitThisFrame)
             {
                 DamageDisplayBehavior.hitThisFrame = true;
