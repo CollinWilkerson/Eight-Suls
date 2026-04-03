@@ -473,6 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: stabbing
+  respawnTime: 0
 --- !u!136 &254992409
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -715,7 +716,19 @@ MonoBehaviour:
       m_Calls: []
   m_FirstSelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 490207590}
+        m_TargetAssemblyTypeName: SwordBehavior, Assembly-CSharp
+        m_MethodName: ActivateOnPickup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -819,7 +832,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -831,8 +844,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490207586}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071069, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -1.43, y: 1.788, z: -11.4470005}
+  m_LocalRotation: {x: 0.029598147, y: 0.4602459, z: -0.88716507, w: 0.015354928}
+  m_LocalPosition: {x: -0.098, y: 0.015, z: 0.125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -841,8 +854,8 @@ Transform:
   - {fileID: 762111100}
   - {fileID: 254992407}
   - {fileID: 653530842}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_Father: {fileID: 1913788851}
+  m_LocalEulerAnglesHint: {x: -234.839, y: 176.178, z: 0}
 --- !u!114 &490207590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,6 +869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: slashing
+  respawnTime: 0.2
 --- !u!65 &490207591
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1202,6 +1216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: slashing
+  respawnTime: 0
 --- !u!136 &653530844
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3032,6 +3047,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7556970514834377207, guid: 3b4ac8e10429daa41a04c2545a1834dd, type: 3}
   m_PrefabInstance: {fileID: 2068436851178707643}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1913788850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1913788851}
+  m_Layer: 2
+  m_Name: SwordSpawnLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1913788851
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913788850}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.273, y: 0.744, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 490207589}
+  m_Father: {fileID: 2068436851178707644}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1954761140
 GameObject:
   m_ObjectHideFlags: 0
@@ -3747,9 +3794,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 9153748997906280488, guid: 3b4ac8e10429daa41a04c2545a1834dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1913788851}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b4ac8e10429daa41a04c2545a1834dd, type: 3}
+--- !u!4 &2068436851178707644 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9153748997906280488, guid: 3b4ac8e10429daa41a04c2545a1834dd, type: 3}
+  m_PrefabInstance: {fileID: 2068436851178707643}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6568840177922096606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3880,7 +3935,6 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 2068436851178707643}
-  - {fileID: 490207589}
   - {fileID: 914619790}
   - {fileID: 1954761145}
   - {fileID: 732355857}
