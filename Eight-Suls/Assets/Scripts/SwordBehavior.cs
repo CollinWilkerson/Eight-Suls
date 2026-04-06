@@ -7,7 +7,6 @@ using UnityEngine;
 public class SwordBehavior : MonoBehaviour
 {
     [SerializeField] string damageType;
-    [SerializeField] float respawnTime = 1f;
 
     private Vector3 hitLocation;
     private bool hitObject = false;
@@ -21,7 +20,7 @@ public class SwordBehavior : MonoBehaviour
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        startPosition = transform.position;
+        startPosition = transform.localPosition;
         startRotation = transform.rotation;
         if(damageDisplay == null)
         {
@@ -77,7 +76,10 @@ public class SwordBehavior : MonoBehaviour
 
     public void EnterGuardStance()
     {
-        attackStance = false;
+        if (!rb.isKinematic)
+        {
+            attackStance = false;
+        }
     }
 
     public void ExitGuardStance()
@@ -88,15 +90,13 @@ public class SwordBehavior : MonoBehaviour
     public void DestroySword()
     {
         rb.isKinematic = true;
-        StartCoroutine(RespawnSword());
+        FindFirstObjectByType<StanceController>().RespawnSword(this);
         gameObject.SetActive(false); //replace this with some animation
     }
 
-    public IEnumerator RespawnSword()
+    public void RespawnSword()
     {
-        yield return new WaitForSeconds(respawnTime);
-        transform.position = startPosition;
+        transform.localPosition = startPosition;
         transform.rotation = startRotation;
-        gameObject.SetActive(true);
     }
 }
