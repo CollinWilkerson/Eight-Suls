@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 //I feel like this is missing some nuance
@@ -46,11 +45,13 @@ public class SwordBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log("Collision with" + collision.gameObject.name);
+        Debug.Log("Sword Collision with" + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Enemy") && attackStance)
         {
+            Debug.Log("Hit Enemy!");
             if(collision.gameObject.GetComponent<EnemyBehavior>() != null)
             {
+                Debug.Log("Damage Enemy!");
                 collision.gameObject.GetComponent<EnemyBehavior>().HitEnemy();
             }
             if (!DamageDisplayBehavior.hitThisFrame)
@@ -62,8 +63,10 @@ public class SwordBehavior : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("EnemyWeapon"))
         {
+            Debug.Log("Hit Enemy Weapon!");
             if (attackStance)
             {
+                Debug.Log("Parried!");
                 DestroySword();
             }
         }
@@ -76,10 +79,8 @@ public class SwordBehavior : MonoBehaviour
 
     public void EnterGuardStance()
     {
-        if (!rb.isKinematic)
-        {
-            attackStance = false;
-        }
+        Debug.Log("Guarding!");
+        attackStance = false;
     }
 
     public void ExitGuardStance()
