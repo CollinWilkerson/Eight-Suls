@@ -80,7 +80,7 @@ public class EnemyBehavior : MonoBehaviour
                 //starts raycast from center of enemy, toward the player, from the distance to the player, only checking objects in the obstructionMask
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                 {
-                    navAgent.destination = rangeChecks[0].transform.position;
+                    navAgent.destination = rangeChecks[0].transform.position + (target.position - transform.position).normalized * -2;
                 }
             }
         }
