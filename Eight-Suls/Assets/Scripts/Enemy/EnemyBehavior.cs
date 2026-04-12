@@ -10,6 +10,7 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] [Range(0, 360)] private float angle = 90;
     [SerializeField] private LayerMask targetMask;
     [SerializeField] private LayerMask obstructionMask;
+    [SerializeField] private float targetOffset;
     
     NavMeshAgent navAgent;
 
@@ -80,7 +81,7 @@ public class EnemyBehavior : MonoBehaviour
                 //starts raycast from center of enemy, toward the player, from the distance to the player, only checking objects in the obstructionMask
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                 {
-                    navAgent.destination = rangeChecks[0].transform.position + (target.position - transform.position).normalized * -2;
+                    navAgent.destination = rangeChecks[0].transform.position + (target.position - transform.position).normalized * -targetOffset;
                 }
             }
         }

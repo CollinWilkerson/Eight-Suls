@@ -45,7 +45,7 @@ public class SwordBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Sword Collision with" + collision.gameObject.name);
+        //Debug.Log("Sword Collision with" + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Enemy") && attackStance)
         {
             Debug.Log("Hit Enemy!");
@@ -99,5 +99,10 @@ public class SwordBehavior : MonoBehaviour
     {
         transform.localPosition = startPosition;
         transform.rotation = startRotation;
+    }
+
+    public bool IsGuarding()
+    {
+        return !attackStance;
     }
 }
