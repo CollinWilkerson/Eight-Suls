@@ -95,10 +95,10 @@ public class SwordBehavior : MonoBehaviour
         gameObject.SetActive(false); //replace this with some animation
     }
 
-    public void RespawnSword()
+    public void RespawnSword(Transform spawnPoint)
     {
-        transform.localPosition = startPosition;
-        transform.rotation = startRotation;
+        transform.position = spawnPoint.position + startPosition;
+        transform.rotation = spawnPoint.rotation;
     }
 
     public bool IsGuarding()

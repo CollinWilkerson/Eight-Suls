@@ -14,6 +14,6 @@ public class StanceController : MonoBehaviour
     {
         yield return new WaitForSeconds(respawnTime);
         sword.gameObject.SetActive(true);
-        sword.RespawnSword();
+        sword.RespawnSword(this.transform);
     }
 }
