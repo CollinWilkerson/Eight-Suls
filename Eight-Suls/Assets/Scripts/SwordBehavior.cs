@@ -27,24 +27,28 @@ public class SwordBehavior : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if(hitObject)
-        {
-            if (delayFrame)
-            {
-                damageDisplay.ReportDamage(damageType, Vector3.Distance(hitLocation, transform.position) * Time.deltaTime);
-                DamageDisplayBehavior.hitThisFrame = false;
-                hitObject = false;
-                delayFrame = false;
-                return;
-            }
-            delayFrame = true;
-        }
-    }
+    //private void Update()
+    //{
+    //    if(hitObject)
+    //    {
+    //        if (delayFrame)
+    //        {
+    //            damageDisplay.ReportDamage(damageType, Vector3.Distance(hitLocation, transform.position) * Time.deltaTime);
+    //            DamageDisplayBehavior.hitThisFrame = false;
+    //            hitObject = false;
+    //            delayFrame = false;
+    //            return;
+    //        }
+    //        delayFrame = true;
+    //    }
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (rb.isKinematic)
+        {
+            return;
+        }
         //Debug.Log("Sword Collision with" + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Enemy") && attackStance)
         {
@@ -79,12 +83,13 @@ public class SwordBehavior : MonoBehaviour
 
     public void EnterGuardStance()
     {
-        Debug.Log("Guarding!");
+        //Debug.Log("Guarding!");
         attackStance = false;
     }
 
     public void ExitGuardStance()
     {
+        //Debug.Log("Attacking");
         attackStance = true;
     }
 
@@ -98,7 +103,8 @@ public class SwordBehavior : MonoBehaviour
     public void RespawnSword(Transform spawnPoint)
     {
         transform.position = spawnPoint.position + startPosition;
-        transform.rotation = spawnPoint.rotation;
+        transform.rotation = startRotation;
+        transform.parent = spawnPoint;
     }
 
     public bool IsGuarding()
