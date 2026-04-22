@@ -7,11 +7,11 @@ public class PlayerCollisionHandler : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collided With: " + collision.gameObject.name);
+        //Debug.Log("Collided With: " + collision.gameObject.name);
 
         if (collision.gameObject.CompareTag("EnemyWeapon"))
         {
-            Debug.Log("HitForDamage");
+            //Debug.Log("HitForDamage");
             PlayerDamaged.Invoke();
         }
     }
